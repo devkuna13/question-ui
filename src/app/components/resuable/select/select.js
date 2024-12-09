@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Select = (props) => {
-  const { name, options, lbl } = props
+  const { name, options, lbl,fnChange,errorMsg } = props
   return (
     <>
       <div className='row'>
@@ -9,7 +9,7 @@ const Select = (props) => {
           <label>{lbl}</label>
         </div>
         <div className='col-sm-3 text-start'>
-          <select name={name} className='form-control'>
+          <select onChange={fnChange} name={name} className='form-control'>
             {
               options.map((opt, ind) => {
                 return <option key={ind + "opt"} value={opt}>{opt}</option>
@@ -18,7 +18,7 @@ const Select = (props) => {
           </select>  
         </div>
         <div className='col-sm-4 text-start'>
-          <small>this is for validation</small>
+          <small>{errorMsg}</small>
         </div>
       </div>
     </>

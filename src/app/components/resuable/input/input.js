@@ -1,19 +1,19 @@
 import React, { Fragment } from 'react';
 
 export const Input = (props) => {
-  const { type, name,lbl, radioFields } = props;
+  const { type, name,lbl, radioFields,fnChange,required,errorMsg } = props;
 
   const fnGetInputControl = () => {
     switch (type) {
       case "text":
-        return <input className="form-control" type="text" name={name} />;
+        return <input onChange={fnChange} className="form-control" type="text" name={name} />;
       case "radio":
         return (
           <Fragment>
             {radioFields.map((field, ind) => (
               <React.Fragment key={ind}>
                 <div className="col-sm-3 text-start">
-                  <input type="radio" value={field.value} name={field.name} />
+                  <input onChange={fnChange} type="radio" value={field.value} name={field.name} />
                   <span>{field.lbl}</span>
                 </div>
               </React.Fragment>
@@ -21,7 +21,7 @@ export const Input = (props) => {
           </Fragment>
         );
       case "input": // Handle input type
-        return <input className="form-control" type="text" name={name} />;
+        return <input onChange={fnChange} className="form-control" type="text" name={name} />;
       default:
         return <span>Unsupported field type</span>; // Fallback for debugging
     }
@@ -31,14 +31,14 @@ export const Input = (props) => {
 return (
     <div className='row'>
        <div className='col-sm-5 text-end'>
-          <b>{lbl}</b>
+          <b>{lbl}</b>{required?<span className='text-danger'>*</span>:<></>}
        </div>
        <div className='col-sm-3 text-start'
          >
          {fnGetInputControl()} 
        </div>
         <div className='col-sm-4 text-start'>
-          <small>this is for validation</small>
+          <small>{errorMsg}</small>
         </div>
     </div>
   

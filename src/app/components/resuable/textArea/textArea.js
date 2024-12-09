@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const TextArea = (props) => {
-  const { name, lbl } = props
+  const { name, lbl,fnChange,errorMsg } = props
   return (
     <>
       <div className='row'>
@@ -14,11 +14,11 @@ export const TextArea = (props) => {
         </div>
         <div className='col-sm-3 text-start'>
 
-          <textarea name={name} className='form-control'>
+          <textarea onChange={fnChange} name={name} className='form-control'>
        </textarea>
         </div>
            <div className='col-sm-4 text-start'>
-          <small>this is the for the validation </small>
+          <small>{errorMsg}</small>
           </div>
 
       </div>
