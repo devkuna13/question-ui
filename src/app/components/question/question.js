@@ -3,37 +3,34 @@ import { configFile } from './configValues'
 import { TextArea } from '../resuable/textArea'
 import { Input } from '../resuable/input'
 import Select from '../resuable/select/select'
-import { fnInputValidation } from '@/includes/common/Validation'
+import { fnOnChange,formValidate } from '@/includes/common/FormFunctions'
+import { ServerCall } from '@/includes/common/ServerCall'
 const Question = () => {
   const [inputValues, setInputValues] = useState(configFile)
+
   const fnChange = (eve) => {
-    const { value, name } = eve.target
-    console.log("value:"+value+"----"+"name:"+name)
-    const _inputValues = [...inputValues];
-    let input_Obj = _inputValues.find((obj) => name === obj.name)
-    input_Obj.value = value
-    if(input_Obj.required)
-    {
-      input_Obj=fnInputValidation(input_Obj)
-      setInputValues(_inputValues)
-    }
+    setInputValues(fnOnChange(eve, inputValues))
   }
 
-  const fnSubmit=()=>{
-    const _inoutValues = [...inputValues]
-    _inoutValues.forEach((obj)=>{
-      if(obj.required){
-        console.log(obj.name+"...."+obj.creteria+"......"+obj.tag)
-        fnInputValidation(obj)
-      }
-    })
-    const isValid=_inoutValues.some((obj)=>obj.errorMsg)
-    if(isValid){
-      setInputValues(_inoutValues)
+  const fnSubmit = () => {
+    const [isValid,_inputValues,dataObj]=formValidate(inputValues)
+    if (isValid) {
+      setInputValues(_inputValues)
       return;
     }
-
-    alert("send to request to the server and save into mongodb")
+    ServerCall.sendPost(`que/save`,{"data":dataObj})
+    .then((res)=>{
+      const {acknowledge,insertedId} = res.data
+      if(acknowledge && insertedId){
+        alert("data inserted successfully")
+      }
+      else{
+        alert("failed to insert the data")
+      }
+    })
+    .catch((res)=>{
+      alert("something went wrong..")
+    })
   }
   return (
     <div className='mt-5 container-fluid'>
