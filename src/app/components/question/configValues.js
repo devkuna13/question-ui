@@ -13,7 +13,7 @@ export const configFile =
             tag: "input",
             type: "input", 
             required: true,
-            creteria:["Required","EmailFormat"]
+            creteria:["Required"]
         },
         {
             lbl: "Option2",
@@ -28,37 +28,41 @@ export const configFile =
             name: "opt3",
             tag: "input",
             type: "input",
+            required: true,
+            creteria:["Required"]
             
         },
         {
             lbl: "Option4",
             name: "opt4",
             tag: "input",
-            type: "input"
+            type: "input",  
+            required: true,
+            creteria:["Required"]
         },
-        {
-            lbl: "Type",
-            name: "type",
-            tag: "radio",
-            type: "radio",
-            radioFields: [
-                { lbl: "Single", value: "single", name: "typeRadio" },
-                { lbl: "Multiple", value: "multiple", name: "typeRadio" }
-            ],
-            required: false,
-        },
-        {
-            lbl: "Answer",
-            name: "type",
-            tag: "select",
-            options: [
-                "A",
-                "B",
-                "C",
-                "D",
-            ],
-            required: false,
-        },
+        // {
+        //     lbl: "Type",
+        //     name: "type",   
+        //     tag: "radio",
+        //     type: "radio",
+        //     radioFields: [
+        //         { lbl: "Single", value: "single", name: "type" },
+        //         { lbl: "Multiple", value: "multiple", name: "type" }
+        //     ],
+        //     required: false,
+        // },
+        // {
+        //     lbl: "Answer",
+        //     name: "ans",
+        //     tag: "select",
+        //     options: [
+        //         "A",
+        //         "B",
+        //         "C",
+        //         "D",
+        //     ],
+        //     required: false,
+        // },
 
     ]
 

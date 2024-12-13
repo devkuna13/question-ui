@@ -5,12 +5,12 @@ export const Input = (props) => {
 
   const fnGetInputControl = () => {
     switch (type) {
-      case "text":
+      case "input":
         return <input onChange={fnChange} className="form-control" type="text" name={name} />;
       case "radio":
         return (
           <Fragment>
-            {radioFields.map((field, ind) => (
+            {radioFields.map((field, ind) => (  
               <React.Fragment key={ind}>
                 <div className="col-sm-3 text-start">
                   <input onChange={fnChange} type="radio" value={field.value} name={field.name} />
@@ -20,8 +20,8 @@ export const Input = (props) => {
             ))}
           </Fragment>
         );
-      case "input": // Handle input type
-        return <input onChange={fnChange} className="form-control" type="text" name={name} />;
+      // case "input": // Handle input type
+      //   return <input onChange={fnChange} className="form-control" type="text" name={name} />;
       default:
         return <span>Unsupported field type</span>; // Fallback for debugging
     }

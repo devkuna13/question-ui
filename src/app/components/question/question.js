@@ -7,9 +7,10 @@ import { fnOnChange,formValidate } from '@/includes/common/FormFunctions'
 import { ServerCall } from '@/includes/common/ServerCall'
 const Question = () => {
   const [inputValues, setInputValues] = useState(configFile)
-
   const fnChange = (eve) => {
-    setInputValues(fnOnChange(eve, inputValues))
+    // console.log("thi is the event ",e.target.value,e.target.name)
+    const afterinputChanedValues=fnOnChange(eve,inputValues)
+    setInputValues(afterinputChanedValues)
   }
 
   const fnSubmit = () => {
@@ -18,14 +19,16 @@ const Question = () => {
       setInputValues(_inputValues)
       return;
     }
+    console.log("thi is the data object",dataObj)
     ServerCall.sendPost(`que/save`,{"data":dataObj})
     .then((res)=>{
-      const {acknowledge,insertedId} = res.data
-      if(acknowledge && insertedId){
+      const {acknowledged,insertedId} = res.data
+      if(acknowledged && insertedId){
         alert("data inserted successfully")
       }
       else{
         alert("failed to insert the data")
+        // console.log("response",res)
       }
     })
     .catch((res)=>{

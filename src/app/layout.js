@@ -4,7 +4,6 @@ import "./globals.css";
 import "bootstrap/dist/css/bootstrap.css"
 import {appStore} from "../store/appStore"
 import { Provider } from "react-redux";
-import dotEnv from "dotenv"
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -22,7 +21,6 @@ const geistMono = localFont({
 };
 
 export default function RootLayout({ children }) {
-  dotEnv.config()
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
